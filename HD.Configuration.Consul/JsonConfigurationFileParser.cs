@@ -1,0 +1,98 @@
+using HD.Configuration.Abstractions;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace HD.Configuration.Consul
+{
+    internal class JsonConfigurationFileParser
+    {
+        private readonly IDictionary<string, string> _data = new SortedDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private readonly Stack<string> _context = new Stack<string>();
+        private string _currentPath;
+
+        public IDictionary<string, string> Parse(string content)
+        {
+            _data.Clear();
+            var jsonConfig = JObject.Parse(content); 
+            VisitJObject(jsonConfig);
+            return _data;
+        }
+
+        private void VisitJObject(JObject jObject)
+        {
+            foreach (var property in jObject.Properties())
+            {
+                EnterContext(property.Name);
+                VisitProperty(property);
+                ExitContext();
+            }
+        }
+
+        private void VisitProperty(JProperty property)
+        {
+            VisitToken(property.Value);
+        }
+
+        private void VisitToken(JToken token)
+        {
+            switch (token.Type)
+            {
+                case JTokenType.Object:
+                    VisitJObject(token.Value<JObject>());
+                    break;
+
+                case JTokenType.Array:
+                    VisitArray(token.Value<JArray>());
+                    break;
+
+                case JTokenType.Integer:
+                case JTokenType.Float:
+                case JTokenType.String:
+                case JTokenType.Boolean:
+                case JTokenType.Bytes:
+                case JTokenType.Raw:
+                case JTokenType.Null:
+                    VisitPrimitive(token);
+                    break;
+
+                default:
+                    throw new FormatException("FormatError_UnsupportedJSONToken");
+            }
+        }
+
+        private void VisitArray(JArray array)
+        {
+            for (int index = 0; index < array.Count; index++)
+            {
+                EnterContext(index.ToString());
+                VisitToken(array[index]);
+                ExitContext();
+            }
+        }
+
+        private void VisitPrimitive(JToken data)
+        {
+            var key = _currentPath;
+
+            if (_data.ContainsKey(key))
+            {
+                throw new FormatException("FormatError_KeyIsDuplicated");
+            }
+            _data[key] = data.ToString();
+        }
+
+        private void EnterContext(string context)
+        {
+            _context.Push(context);
+            _currentPath = ConfigurationPath.Combine(_context.Reverse());
+        }
+
+        private void ExitContext()
+        {
+            _context.Pop();
+            _currentPath = ConfigurationPath.Combine(_context.Reverse());
+        }
+    }
+}

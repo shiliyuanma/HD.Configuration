@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F5AA4634-1231-41AB-A0B6-58160EA228E2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HD.Configuration.FileExtensions</RootNamespace>
+    <AssemblyName>HD.Configuration.FileExtensions</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FileConfigurationExtensions.cs" />
+    <Compile Include="FileConfigurationProvider.cs" />
+    <Compile Include="FileConfigurationSource.cs" />
+    <Compile Include="FileLoadExceptionContext.cs" />
+    <Compile Include="FileProviders.Abstractions\IDirectoryContents.cs" />
+    <Compile Include="FileProviders.Abstractions\IFileInfo.cs" />
+    <Compile Include="FileProviders.Abstractions\IFileProvider.cs" />
+    <Compile Include="FileProviders.Abstractions\NotFoundDirectoryContents.cs" />
+    <Compile Include="FileProviders.Abstractions\NotFoundFileInfo.cs" />
+    <Compile Include="FileProviders.Abstractions\NullChangeToken.cs" />
+    <Compile Include="FileProviders.Abstractions\NullFileProvider.cs" />
+    <Compile Include="FileProviders.Physical\FileSystemInfoHelper.cs" />
+    <Compile Include="FileProviders.Physical\IncrementalHash.cs" />
+    <Compile Include="FileProviders.Physical\Internal\Clock.cs" />
+    <Compile Include="FileProviders.Physical\Internal\IClock.cs" />
+    <Compile Include="FileProviders.Physical\Internal\PhysicalDirectoryContents.cs" />
+    <Compile Include="FileProviders.Physical\PhysicalDirectoryInfo.cs" />
+    <Compile Include="FileProviders.Physical\PhysicalFileInfo.cs" />
+    <Compile Include="FileProviders.Physical\PhysicalFileProvider.cs" />
+    <Compile Include="FileProviders.Physical\PhysicalFilesWatcher.cs" />
+    <Compile Include="FileProviders.Physical\PollingFileChangeToken.cs" />
+    <Compile Include="FileProviders.Physical\PollingWildCardChangeToken.cs" />
+    <Compile Include="FileProviders.Sources\CompositeDisposable.cs" />
+    <Compile Include="FileProviders.Sources\CompositeFileChangeToken.cs" />
+    <Compile Include="FileProviders.Sources\Constants.cs" />
+    <Compile Include="FileProviders.Sources\EmptyDisposable.cs" />
+    <Compile Include="FileProviders.Sources\EnumerableDirectoryContents.cs" />
+    <Compile Include="FileSystemGlobbing\Abstractions\DirectoryInfoBase.cs" />
+    <Compile Include="FileSystemGlobbing\Abstractions\DirectoryInfoWrapper.cs" />
+    <Compile Include="FileSystemGlobbing\Abstractions\FileInfoBase.cs" />
+    <Compile Include="FileSystemGlobbing\Abstractions\FileInfoWrapper.cs" />
+    <Compile Include="FileSystemGlobbing\Abstractions\FileSystemInfoBase.cs" />
+    <Compile Include="FileSystemGlobbing\FilePatternMatch.cs" />
+    <Compile Include="FileSystemGlobbing\HashAlgorithmName.cs" />
+    <Compile Include="FileSystemGlobbing\HashCodeCombiner.cs" />
+    <Compile Include="FileSystemGlobbing\IncrementalHash.cs" />
+    <Compile Include="FileSystemGlobbing\InMemoryDirectoryInfo.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\ILinearPattern.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\InMemoryFileInfo.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\IPathSegment.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\IPattern.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\IPatternContext.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\IRaggedPattern.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\MatcherContext.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\PathSegments\CurrentPathSegment.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\PathSegments\LiteralPathSegment.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\PathSegments\ParentPathSegment.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\PathSegments\RecursiveWildcardSegment.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\PathSegments\WildcardPathSegment.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\PatternContexts\PatternContext.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\PatternContexts\PatternContextLinear.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\PatternContexts\PatternContextLinearExclude.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\PatternContexts\PatternContextLinearInclude.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\PatternContexts\PatternContextRagged.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\PatternContexts\PatternContextRaggedExclude.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\PatternContexts\PatternContextRaggedInclude.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\Patterns\PatternBuilder.cs" />
+    <Compile Include="FileSystemGlobbing\Internal\PatternTestResult.cs" />
+    <Compile Include="FileSystemGlobbing\Matcher.cs" />
+    <Compile Include="FileSystemGlobbing\MatcherExtensions.cs" />
+    <Compile Include="FileSystemGlobbing\PatternMatchingResult.cs" />
+    <Compile Include="FileSystemGlobbing\Util\StringComparisonHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HD.Configuration.Abstractions\HD.Configuration.Abstractions.csproj">
+      <Project>{3515ffb0-71c7-491a-b895-0d13e0ffdbd8}</Project>
+      <Name>HD.Configuration.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HD.Configuration\HD.Configuration.csproj">
+      <Project>{5d48c30e-6505-4b88-8d07-a53d55c496c6}</Project>
+      <Name>HD.Configuration</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

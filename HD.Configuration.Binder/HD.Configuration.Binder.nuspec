@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>huangdong</authors>
+    <owners>followme</owners>
+
+    <licenseUrl>http://followme.com</licenseUrl>
+    <projectUrl>http://followme.com</projectUrl>
+    <iconUrl>http://followme.com</iconUrl>
+    
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>config binder</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>config binder</tags>
+  </metadata>
+</package>
